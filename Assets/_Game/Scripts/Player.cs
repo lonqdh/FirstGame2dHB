@@ -13,8 +13,7 @@ public class Player : Character
     [SerializeField] private Kunai kunaiPrefab;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
-    
-    
+
 
 
     private bool isGrounded = true;
@@ -27,15 +26,23 @@ public class Player : Character
     private int attackMove = 0;
 
     private int coin = 0;
-    private int highcoin = 0;
-    
+    //private int highcoin = 0;
+
     private Vector3 savePoint;
-    
+
+    private bool respawn;
+
 
     private void Awake()
     {
-        highcoin = PlayerPrefs.GetInt("Highscore", 0);
+        //highcoin = PlayerPrefs.GetInt("Highscore", 0);
     }
+
+    //private void Start()
+    //{
+    //    OnInit();
+    //}
+
 
     // Update is called once per frame
     void Update()
@@ -43,11 +50,11 @@ public class Player : Character
         //Debug.Log("Update");
         //Debug.LogError("Update"); // khong khac gi debug log, chi la thay doi mau log thanh mau do?
 
-        if(IsDead)
+        if (IsDead)
         {
             return;
         }
-        
+
         isGrounded = CheckGrounded();
         // -1 -> 0 -> 1
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -71,7 +78,7 @@ public class Player : Character
                 Jump();
             }
 
-            if (Mathf.Abs(horizontal) > 0.1f) 
+            if (Mathf.Abs(horizontal) > 0.1f)
             {
                 ChangeAnim("Run");
 
@@ -113,7 +120,7 @@ public class Player : Character
         }
 
         //move
-        if (Mathf.Abs(horizontal) > 0.1f) 
+        if (Mathf.Abs(horizontal) > 0.1f)
         {
             //ChangeAnim("run");
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -133,6 +140,12 @@ public class Player : Character
     {
         base.OnInit();
 
+        if(respawn == false)
+        {
+            this.GetComponent<Rigidbody2D>().gravityScale = 0;
+        }
+        
+
         isAttack = false;
 
         transform.position = savePoint;
@@ -141,12 +154,13 @@ public class Player : Character
 
         SavePoint();
         UIManager.instance.SetCoin(coin);
-        UIManager.instance.SetHighScoreCoin(highcoin);
+        //UIManager.instance.SetHighScoreCoin(highcoin);
     }
 
     public override void OnDespawn()
     {
         base.OnDespawn();
+        respawn = true;
         OnInit();
     }
 
@@ -159,7 +173,7 @@ public class Player : Character
     {
         base.OnDeath();
 
-       
+
     }
 
     private bool CheckGrounded()
@@ -183,10 +197,10 @@ public class Player : Character
         //
         rb.velocity = Vector2.zero;
         isAttack = true;
-        attackMove = (attackMove % 3) + 1;
-        //ChangeAnim("Attack1");
+        //attackMove = (attackMove % 3) + 1;
+        ChangeAnim("Attack1");
         //Debug.Log("Attack 1 !");
-        ChangeAnim("Attack" + attackMove.ToString());
+        //ChangeAnim("Attack" + attackMove.ToString());
         ActiveAttack();
         Invoke(nameof(ResetAttack), 0.5f);
         //ActiveAttack();
@@ -218,7 +232,7 @@ public class Player : Character
         rb.AddForce(jumpForce * Vector2.up);
     }
 
-    
+
     internal void SavePoint()
     {
         savePoint = transform.position;
@@ -236,19 +250,19 @@ public class Player : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Coin")
+        if (collision.tag == "Coin")
         {
             coin++;
-            if(highcoin < coin)
-            {
-                highcoin = coin;
-                PlayerPrefs.SetInt("Highscore", highcoin);
-            }
-            UIManager.instance.SetHighScoreCoin(highcoin);
+            //if(highcoin < coin)
+            //{
+            //    highcoin = coin;
+            //    PlayerPrefs.SetInt("Highscore", highcoin);
+            //}
+            //UIManager.instance.SetHighScoreCoin(highcoin);
             UIManager.instance.SetCoin(coin);
             Destroy(collision.gameObject);
         }
-        if(collision.tag == "DeathZone")
+        if (collision.tag == "DeathZone")
         {
             ChangeAnim("Die");
             Invoke(nameof(OnInit), 1f);
@@ -256,5 +270,5 @@ public class Player : Character
     }
 
 
-   
+
 }

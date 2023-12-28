@@ -34,10 +34,10 @@ public class UIManager : MonoBehaviour
         coinText.text = coin.ToString();
     }
 
-    public void SetHighScoreCoin(int highScore)
-    {
-        highScoreText.text = highScore.ToString();
-    }
+    //public void SetHighScoreCoin(int highScore)
+    //{
+    //    highScoreText.text = highScore.ToString();
+    //}
 
 
 

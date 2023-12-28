@@ -10,8 +10,13 @@ public class LevelButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private Button levelButton;
     public GameObject menu;
+    public Player player;
     private GameObject level;
 
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
     public void SetData(int id)
     {
@@ -23,6 +28,7 @@ public class LevelButton : MonoBehaviour
     {
         level = Resources.Load<GameObject>("Level" + id);
         Instantiate(level);
+        player.GetComponent<Rigidbody2D>().gravityScale = 1;
         menu.SetActive(false);
     }
 }

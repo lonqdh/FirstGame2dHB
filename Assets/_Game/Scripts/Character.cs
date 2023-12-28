@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         OnInit();
+
     }
 
     public virtual void OnInit()

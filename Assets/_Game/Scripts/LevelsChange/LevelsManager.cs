@@ -26,23 +26,4 @@ public class LevelsManager : MonoBehaviour
         }
     }
 
-
-
-
-
-    //[SerializeField] private Button level;
-    //[SerializeField] private GameObject levelmapprefab;
-    //[SerializeField] private GameObject menu;
-
-    //private void Start()
-    //{
-    //    level.onClick.AddListener(LoadLevel);
-    //}
-
-    //public void LoadLevel()
-    //{
-    //    menu.SetActive(false);
-    //    Instantiate(levelmapprefab);
-    //}
-
 }

@@ -34,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 7642196916215289035}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -105,7 +104,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 1.81
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -137,6 +136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelText: {fileID: 7642196916215289034}
   levelButton: {fileID: 7642196915349893723}
+  menu: {fileID: 0}
+  player: {fileID: 1780848336368502107, guid: 093b53be3209fdf4aa53be9a3a893c55, type: 3}
 --- !u!1 &7642196916215289076
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7642196915349893700}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
